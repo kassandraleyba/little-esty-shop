@@ -19,3 +19,6 @@
     <li><%= item.name %>: <%= link_to item.item_invoice_id, "/merchants/#{@merchant.id}/invoices" %></li>, <%= item.inv_time.strftime("%A, %B %e, %Y") %>
   <% end %>
 </ul>
+
+
+<%= link_to "View All Discounts", "/merchants/#{@merchant.id}/bulk_discounts" %>

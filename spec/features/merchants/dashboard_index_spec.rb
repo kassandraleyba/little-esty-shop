@@ -138,5 +138,43 @@ RSpec.describe "Merchant Dashboard Index" do
         expect(page).to have_content("Wednesday, March 1, 2023")
       end
     end
+
+
+    # 1: Merchant Bulk Discounts Index
+    # Where I see all of my bulk discounts including their
+    # percentage discount and quantity thresholds
+    # And each bulk discount listed includes a link to its show page
+
+    describe "visit my merchant dashboard" do
+      before do
+        @merchant1 = Merchant.create!(name: "Sally's", status: 0)
+        @merchant2 = Merchant.create!(name: "Bobby's", status: 1)
+        @bulk_discount1 = BulkDiscount.create!(name: "20% off 10", percentage_discount: 0.20, quantity_threshold: 10, merchant_id: @merchant1.id)
+        @bulk_discount2 = BulkDiscount.create!(name: "30% off 15", percentage_discount: 0.30, quantity_threshold: 15, merchant_id: @merchant1.id)
+        @bulk_discount3 = BulkDiscount.create!(name: "15% off 25", percentage_discount: 0.15, quantity_threshold: 25, merchant_id: @merchant2.id)
+
+      end
+      
+      it "Then I see a link to view all my discounts and I am taken to /bulk_discounts" do
+        visit "/merchants/#{@merchant1.id}/dashboard"
+
+        expect(page).to have_link("View All Discounts")
+        click_link("View All Discounts")
+        expect(current_path).to eq("/merchants/#{@merchant1.id}/bulk_discounts")
+      end
+
+      it "Where I see all of my bulk discounts including their percentage discount & quantity thresholds" do
+        visit "/merchants/#{@merchant1.id}/bulk_discounts"
+
+        expect(page).to have_content("Bulk Discounts: 20% off 10")
+        expect(page).to have_content("Percentage: 20.0%")
+        expect(page).to have_content("Quantity Threshold: 10")
+        expect(page).to have_link("#{@bulk_discount1.name}")
+
+        expect(page).to_not have_content("Bulk Discounts: 15% off 15")
+        expect(page).to_not have_content("Percentage: 15%")
+        expect(page).to_not have_content("Quantity Threshold: 25")
+      end
+    end
   end
 end

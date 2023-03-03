@@ -1,0 +1,11 @@
+<h1>Bulk Discount Index Page</h1>
+
+<p><%= @merchant.name %></p>
+
+
+<% @bulk_discounts.each do |bulk_discount| %>
+  <p>Bulk Discounts: <%= link_to bulk_discount.name, "/merchants/#{@merchant.id}/bulk_discounts/#{bulk_discount.id}" %></p>
+  <p>Percentage: <%= (bulk_discount.percentage_discount * 100) %>%</p>
+  <p>Quantity Threshold: <%= bulk_discount.quantity_threshold %></p>
+<% end %>
+
