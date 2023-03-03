@@ -141,9 +141,6 @@ RSpec.describe "Merchant Dashboard Index" do
 
 
     # 1: Merchant Bulk Discounts Index
-    # Where I see all of my bulk discounts including their
-    # percentage discount and quantity thresholds
-    # And each bulk discount listed includes a link to its show page
 
     describe "visit my merchant dashboard" do
       before do
