@@ -149,7 +149,6 @@ RSpec.describe "Merchant Dashboard Index" do
         @bulk_discount1 = BulkDiscount.create!(name: "20% off 10", percentage_discount: 0.20, quantity_threshold: 10, merchant_id: @merchant1.id)
         @bulk_discount2 = BulkDiscount.create!(name: "30% off 15", percentage_discount: 0.30, quantity_threshold: 15, merchant_id: @merchant1.id)
         @bulk_discount3 = BulkDiscount.create!(name: "15% off 25", percentage_discount: 0.15, quantity_threshold: 25, merchant_id: @merchant2.id)
-
       end
       
       it "Then I see a link to view all my discounts and I am taken to /bulk_discounts" do
@@ -164,7 +163,7 @@ RSpec.describe "Merchant Dashboard Index" do
         visit "/merchants/#{@merchant1.id}/bulk_discounts"
 
         expect(page).to have_content("Bulk Discounts: 20% off 10")
-        expect(page).to have_content("Percentage: 20.0%")
+        expect(page).to have_content("Percentage: 0.2%")
         expect(page).to have_content("Quantity Threshold: 10")
         expect(page).to have_link("#{@bulk_discount1.name}")
 

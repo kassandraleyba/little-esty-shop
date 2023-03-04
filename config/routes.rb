@@ -12,7 +12,7 @@ Rails.application.routes.draw do
     get '/dashboard', to: 'merchants#dashboard'
     resources :items, only: [:index, :show, :new, :create, :edit, :update]
     resources :invoices 
-    resources :bulk_discounts, only: [:index]
+    resources :bulk_discounts, only: [:index, :new, :create]
   end
   resources :invoice_items, only: [:update]
   resources :items, only: [:create]
