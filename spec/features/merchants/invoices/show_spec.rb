@@ -58,8 +58,8 @@ RSpec.describe "Merchant Invoice Show Page" do
 
     end
 
-  # 18. Merchant Invoice Show Page: Update Item Status
-  it 'field displays current invoice item status and button allows the status to change' do
+    # 18. Merchant Invoice Show Page: Update Item Status
+    it 'field displays current invoice item status and button allows the status to change' do
   
       visit "/merchants/#{@merchant_1.id}/invoices/#{@invoice_1.id}"
       
@@ -79,4 +79,11 @@ RSpec.describe "Merchant Invoice Show Page" do
       end
     end
   end
+
+#   6: Merchant Invoice Show Page: Total Revenue and Discounted Revenue
+
+# As a merchant
+# When I visit my merchant invoice show page
+# Then I see the total revenue for my merchant from this invoice (not including discounts)
+# And I see the total discounted revenue for my merchant from this invoice which includes bulk discounts in the calculation
 end

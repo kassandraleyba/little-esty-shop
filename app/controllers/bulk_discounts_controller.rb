@@ -6,7 +6,6 @@ class BulkDiscountsController < ApplicationController
     @holidays = get_next_three_holidays.map do |holiday|
       UsHoliday.new(holiday)
     end
-    # binding.pry
   end
 
   def show
@@ -42,8 +41,8 @@ class BulkDiscountsController < ApplicationController
     if bulk_discount.update(bulk_discount_params)
       redirect_to "/merchants/#{merchant.id}/bulk_discounts/#{bulk_discount.id}"
     else
+      flash[:notice] = "Invalid Input"
       redirect_to "/merchants/#{merchant.id}/bulk_discounts/#{bulk_discount.id}/edit"
-      flash[:notice] = "Invalid input"
     end
   end
 
