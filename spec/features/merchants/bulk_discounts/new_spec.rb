@@ -1,11 +1,8 @@
 require 'rails_helper'
 
 RSpec.describe "Merchant Bulk Discount New Page" do
-   # 2: Merchant Bulk Discount Create
-  # When I fill in the form with valid data
-  # Then I am redirected back to the bulk discount index
-  # And I see my new bulk discount listed
-
+  
+  # 2: Merchant Bulk Discount Create
   describe "When I visit /merchants/:merchant_id/bulk_discounts/new" do
     before do
       @merchant1 = Merchant.create!(name: "Sally's", status: 0)
