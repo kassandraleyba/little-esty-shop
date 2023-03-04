@@ -6,8 +6,7 @@ class BulkDiscountsController < ApplicationController
 
   def show
     @merchant = Merchant.find(params[:merchant_id])
-    @bulk_discounts = @merchant.bulk_discounts
-    @bulk_discount = BulkDiscount.find(params[:id])
+    @bulk_discount = @merchant.bulk_discounts.find(params[:id])
   end
 
   def new
@@ -24,6 +23,22 @@ class BulkDiscountsController < ApplicationController
     else
       flash[:notice] = "Invalid Input"
       redirect_to "/merchants/#{merchant.id}/bulk_discounts/new"
+    end
+  end
+
+  def edit
+    @merchant = Merchant.find(params[:merchant_id])
+    @bulk_discount = @merchant.bulk_discounts.find(params[:id])
+  end
+
+  def update 
+    merchant = Merchant.find(params[:merchant_id])
+    bulk_discount = merchant.bulk_discounts.find(params[:id])
+    if bulk_discount.update(bulk_discount_params)
+      redirect_to "/merchants/#{merchant.id}/bulk_discounts/#{bulk_discount.id}"
+    else
+      redirect_to "/merchants/#{merchant.id}/bulk_discounts/#{bulk_discount.id}/edit"
+      flash[:notice] = "Invalid input"
     end
   end
 

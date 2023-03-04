@@ -21,4 +21,25 @@ RSpec.describe "Merchant Bulk Discount Show Page" do
       expect(page).to_not have_content("Discount: 0.3%")
     end
   end
+
+  # 5: Merchant Bulk Discount Edit
+  describe "I see a link to edit the bulk discount and When I click this link" do
+    it "Then I am taken to a new page with a form to edit the discount" do
+      expect(page).to have_content("Edit #{@bulk_discount1.name}")
+      click_on "Edit #{@bulk_discount1.name}"
+      expect(current_path).to eq("/merchants/#{@merchant1.id}/bulk_discounts/#{@bulk_discount1.id}/edit")
+    end
+
+    it "I see that the current info & when I change & click submit, I am redirected to the show page" do
+      visit "/merchants/#{@merchant1.id}/bulk_discounts/#{@bulk_discount1.id}/edit"
+
+      expect(page).to have_content("Edit Bulk Discount")
+      expect(page).to have_field(:name, with: "20% off 10")
+      expect(page).to have_field(:percentage_discount, with: "0.2")
+      expect(page).to have_field(:quantity_threshold, with: 10)
+      expect(page).to have_button("Submit")
+      click_on "Submit"
+      expect(current_path).to eq("/merchants/#{@merchant1.id}/bulk_discounts/#{@bulk_discount1.id}")
+    end
+  end
 end
