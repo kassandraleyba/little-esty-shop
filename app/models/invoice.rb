@@ -28,4 +28,21 @@ class Invoice < ApplicationRecord
     items
     .select("invoice_items.status as stat, items.*, invoice_items.unit_price as sale_price, invoice_items.quantity as quant")
   end
+
+  def total_invoice_discount
+    x = invoice_items
+    .joins(item: {merchant: :bulk_discounts})
+    .where("bulk_discounts.quantity_threshold <= invoice_items.quantity")
+    .group("invoice_items.id")
+    .select('MAX(invoice_items.quantity * invoice_items.unit_price * bulk_discounts.percentage_discount) AS discount')
+    x.sum(&:discount)
+
+    # return joined invoice items
+    # gives the amount that is being discounted
+    # what is an arel node
+  end
+
+  def total_discounted_revenue
+    calc_total_revenue - total_invoice_discount
+  end
 end

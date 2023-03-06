@@ -58,4 +58,40 @@ RSpec.describe Invoice, type: :model do
       expect(invoice10.calc_total_revenue).to eq(100)
     end
   end
+
+  describe "instance method - bulk discounts" do
+    before do
+      @merchant1 = Merchant.create!(name: "Carlos Jenkins") 
+      @customer1 = Customer.create!(first_name: "Laura", last_name: "Fiel")
+      @customer2 = Customer.create!(first_name: "Bob", last_name: "Fiel")
+      
+      @invoice1 = @customer1.invoices.create!(status: 1, created_at: "2023-02-27 09:54:09")
+      @invoice2 = @customer1.invoices.create!(status: 1, created_at: "2023-02-27 09:54:09")
+      
+      @bowl = @merchant1.items.create!(name: "bowl", description: "it's a bowl", unit_price: 350) 
+      @knife = @merchant1.items.create!(name: "knife", description: "it's a knife", unit_price: 250) 
+      @plate = @merchant1.items.create!(name: "plate", description: "it's a plate", unit_price: 250) 
+      
+      @transaction1 = @invoice1.transactions.create!(credit_card_number: 5555555555555555, credit_card_expiration_date: nil, result: 0)
+      @transaction2 = @invoice2.transactions.create!(credit_card_number: 5555555555555555, credit_card_expiration_date: nil, result: 0)
+      
+      InvoiceItem.create!(item_id: @bowl.id, invoice_id: @invoice1.id, quantity: 11, unit_price: 270, status: 1)
+      InvoiceItem.create!(item_id: @knife.id, invoice_id: @invoice1.id, quantity: 16, unit_price: 540, status: 1)
+      InvoiceItem.create!(item_id: @plate.id, invoice_id: @invoice1.id, quantity: 5, unit_price: 670, status: 1)
+
+      InvoiceItem.create!(item_id: @bowl.id, invoice_id: @invoice2.id, quantity: 20, unit_price: 350, status: 1)
+      InvoiceItem.create!(item_id: @knife.id, invoice_id: @invoice2.id, quantity: 10, unit_price: 300, status: 1)
+
+      @bulkdiscount1 = @merchant1.bulk_discounts.create!(percentage_discount: 0.20, quantity_threshold: 10)
+      @bulkdiscount2 = @merchant1.bulk_discounts.create!(percentage_discount: 0.25, quantity_threshold: 15)
+    end
+
+    it "total invoice discount" do
+      expect(@invoice1.total_invoice_discount).to eq(2754.0)
+    end
+
+    it "total discounted revenue" do
+      expect(@invoice1.total_discounted_revenue).to eq(12206.0)
+    end
+  end
 end
