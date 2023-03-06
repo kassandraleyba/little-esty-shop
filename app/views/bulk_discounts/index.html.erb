@@ -11,3 +11,10 @@
   
   <%= link_to "Delete #{bulk_discount.name}", "/merchants/#{@merchant.id}/bulk_discounts/#{bulk_discount.id}", method: :delete %>
 <% end %>
+
+<h3>Upcoming Holidays</h3>
+
+<% @holidays.each do |holiday| %>
+  <p>Name: <%= holiday.name %></p>
+  <p>Date: <%= holiday.date %></p>
+<% end %>
