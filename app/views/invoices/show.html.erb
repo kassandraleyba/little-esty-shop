@@ -6,14 +6,21 @@
 
 <p>Customer: <%= @invoice.customer.first_name %> <%= @invoice.customer.last_name %>
 
-<% @invoice_items.each do |item| %>
-  <div id="invoice-item-<%= item.id %>">
-    <%= form_with url: "/invoice_items/#{item.invoice_where(@invoice.id).id}", method: :patch, local: true do |form| %>
-      <p>Name: <%= item.name %></p>
-      <p>Unit Price: <%= format_price(item.sale_price) %></p>
-      <p>Status: <%= item.stat %></p>
-      <%= form.select :status, display_and_order(@statuses, item.stat) %><%= form.submit "Update Item Status" %>
-      <p>Quantity: <%= item.item_quantity %></p>
+<% @invoice.invoice_items.each do |ii| %>
+  <div id="invoice-item-<%= ii.id %>">
+    <%= form_with url: "/invoice_items/#{ii.id}", method: :patch, local: true do |form| %>
+      <p>Name: <%= ii.item.name %> 
+
+    <div id="link-<%= ii.id %>">
+      <% if ii.best_discount != nil %>
+        <%= link_to "Discount Applied", "/merchants/#{@merchant.id}/bulk_discounts/#{ii.best_discount.id}" %></p>
+      <% end %>
+    </div>
+
+      <p>Unit Price: <%= number_to_currency(ii.unit_price) %></p>
+      <p>Status: <%= ii.status %></p>
+      <%= form.select :status, display_and_order(@statuses, ii.status) %><%= form.submit "Update Item Status" %>
+      <p>Quantity: <%= ii.quantity %></p>
     <% end %>
   </div>
 <% end %>
@@ -21,5 +28,3 @@
 <p> Total Revenue: <%= format_price(@total_revenue) %></p>
 
 <p>Total Discounted Revenue: <%= format_price(@total_discounted_revenue) %></p>
-
-
