@@ -5,6 +5,7 @@ class Admin::InvoicesController < ApplicationController
     @invoice_items_and_attributes = @invoice.items_with_invoice_attributes
     @total_revenue = @invoice.calc_total_revenue
     @statuses = ["cancelled", "in_progress", "completed"]
+    @total_discounted_revenue = @invoice.total_discounted_revenue
   end
 
   def index
