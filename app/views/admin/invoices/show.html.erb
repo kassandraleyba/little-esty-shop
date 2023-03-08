@@ -1,5 +1,9 @@
 <h1> Invoice ID: <%= @invoice.id %> </h1>
 
+<h3> Total Revenue: <%= format_price(@total_revenue) %> </h3>
+
+<h3>Total Discounted Revenue: <%= format_price(@total_discounted_revenue) %></h3>
+
 <p><%= 'ID: ' + @invoice.id.to_s %></p>
 
 <%= form_with url: admin_invoice_path(@invoice), method: :put, remote: true do |form|  %>
@@ -25,9 +29,6 @@
 <%end %>
 </div>
 
-<h3> Total Revenue: <%= format_price(@total_revenue) %> </h3>
-
-<p>Total Discounted Revenue: <%= format_price(@total_discounted_revenue) %></p>
 
 
 

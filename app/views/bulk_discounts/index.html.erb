@@ -1,20 +1,30 @@
 <h1>Bulk Discount Index Page</h1>
 
-<p><%= link_to "Dashboard", "/merchants/#{@merchant.id}/dashboard" %></p>
-<p><%= @merchant.name %></p>
-<%= link_to "New Discount", "/merchants/#{@merchant.id}/bulk_discounts/new" %>
+<div class="bd-main">
+  <div class="bd-left">
+    <div class="nav-link">
+      <p><%= link_to "Dashboard", "/merchants/#{@merchant.id}/dashboard" %></p>
+    </div>
 
-<% @bulk_discounts.each do |bulk_discount| %>
-  <p>Bulk Discounts: <%= link_to bulk_discount.name, "/merchants/#{@merchant.id}/bulk_discounts/#{bulk_discount.id}" %></p>
-  <p>Percentage: <%= bulk_discount.percentage_discount %>%</p>
-  <p>Quantity Threshold: <%= bulk_discount.quantity_threshold %></p>
-  
-  <%= link_to "Delete #{bulk_discount.name}", "/merchants/#{@merchant.id}/bulk_discounts/#{bulk_discount.id}", method: :delete %>
-<% end %>
+    <div class="bd-name-head">
+      <h3><%= @merchant.name %></h3> <p><%= link_to "New Discount", "/merchants/#{@merchant.id}/bulk_discounts/new", :class => "new-disc" %></p>
+    </div>
 
-<h3>Upcoming Holidays</h3>
+    <% @bulk_discounts.each do |bulk_discount| %>
+      <p>Bulk Discounts: <%= link_to bulk_discount.name, "/merchants/#{@merchant.id}/bulk_discounts/#{bulk_discount.id}" %></p>
+      <p>Percentage: <%= bulk_discount.percentage_discount %>%</p>
+      <p>Quantity Threshold: <%= bulk_discount.quantity_threshold %></p>
+      
+      <p><%= link_to "Delete #{bulk_discount.name}", "/merchants/#{@merchant.id}/bulk_discounts/#{bulk_discount.id}", method: :delete %></p>
+    <% end %>
+  </div>
 
-<% @holidays.each do |holiday| %>
-  <p>Name: <%= holiday.name %></p>
-  <p>Date: <%= holiday.date %></p>
-<% end %>
+  <div class="bd-right">
+    <h3>Upcoming Holidays</h3>
+
+    <% @holidays.each do |holiday| %>
+      <p>Name: <%= holiday.name %></p>
+      <p>Date: <%= holiday.date %></p>
+    <% end %>
+  </div>
+</div>

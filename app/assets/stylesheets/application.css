@@ -14,6 +14,42 @@
  *= require_self
  */
 
+.bd-main {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  box-sizing: border-box;
+  padding: 20px;
+  }
+
+.bd-left {
+  display: flex;
+  flex-direction: column;
+  }
+
+.bd-right {
+  display: flex;
+  flex-direction: column;
+}
+
+.bd-name-head {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+
+.nav-link {
+  display: flex;
+  flex-direction: row;
+  margin-bottom: 20px;
+}
+
+.new-disc {
+  background-color: #7fa9e9;
+  color: white;
+}
+
 
  .top-container {
   display: flex;
