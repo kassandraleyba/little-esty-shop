@@ -1,3 +1,11 @@
+## Little Etsy Shop - Bulk Discounts - Solo Project 
+This project is an extension of the Little Esty Shop group project. There is added functionality for merchants to create bulk discounts for their items. A “bulk discount” is a discount based on the quantity of items the customer is buying, for example “20% off orders of 10 or more items.
+
+## Contributor
+Kassandra Leyba (https://github.com/kassandraleyba/)
+
+--------
+
 # Little Esty Shop
 "Little Esty Shop" is a group project that requires students to build a fictitious e-commerce platform where merchants and admins can manage inventory and fulfill customer invoices. This project will demonstrate 
 
@@ -24,7 +32,3 @@ Work completed includes user stories 1 through 36 as well as 3 Github stories fo
 
 ## Contributing
 Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change. Of special consideration is a refactor of the GitHub REST API user stories to better integreate functionality in terms of Rails and object oriented design. Several spec files could also be refactorted to include more robust tests and test data with more edge cases.
-
-
-## Bulk Discounts - Solo Project 
-Bulk Discounts adds onto previous Esty Shop project. This project includes 
