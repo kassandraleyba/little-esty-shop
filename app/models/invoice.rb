@@ -39,7 +39,6 @@ class Invoice < ApplicationRecord
 
     # return joined invoice items
     # gives the amount that is being discounted
-    # what is an arel node
   end
 
   def total_discounted_revenue

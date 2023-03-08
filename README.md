@@ -24,3 +24,7 @@ Work completed includes user stories 1 through 36 as well as 3 Github stories fo
 
 ## Contributing
 Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change. Of special consideration is a refactor of the GitHub REST API user stories to better integreate functionality in terms of Rails and object oriented design. Several spec files could also be refactorted to include more robust tests and test data with more edge cases.
+
+
+## Bulk Discounts - Solo Project 
+Bulk Discounts adds onto previous Esty Shop project. This project includes 

@@ -42,8 +42,27 @@ RSpec.describe "Merchant Bulk Discount Show Page" do
       fill_in :name, with: "New Name"
       fill_in :percentage_discount, with: "0.1"
       fill_in :quantity_threshold, with: 5
-
+      
       click_on "Submit"
+      save_and_open_page
+      expect(current_path).to eq("/merchants/#{@merchant1.id}/bulk_discounts/#{@bulk_discount1.id}")
+    end
+
+    it "sad path" do
+      visit "/merchants/#{@merchant1.id}/bulk_discounts/#{@bulk_discount1.id}/edit"
+
+      expect(page).to have_content("Edit Bulk Discount")
+      expect(page).to have_field(:name, with: "20% off 10")
+      expect(page).to have_field(:percentage_discount, with: "0.2")
+      expect(page).to have_field(:quantity_threshold, with: 10)
+      expect(page).to have_button("Submit")
+
+      fill_in :name, with: ""
+      fill_in :percentage_discount, with: "0.1"
+      fill_in :quantity_threshold, with: 5
+      
+      click_on "Submit"
+      save_and_open_page
       expect(current_path).to eq("/merchants/#{@merchant1.id}/bulk_discounts/#{@bulk_discount1.id}")
     end
   end
