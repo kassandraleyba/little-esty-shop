@@ -44,7 +44,6 @@ RSpec.describe "Merchant Bulk Discount Show Page" do
       fill_in :quantity_threshold, with: 5
       
       click_on "Submit"
-      save_and_open_page
       expect(current_path).to eq("/merchants/#{@merchant1.id}/bulk_discounts/#{@bulk_discount1.id}")
     end
 
@@ -62,7 +61,7 @@ RSpec.describe "Merchant Bulk Discount Show Page" do
       fill_in :quantity_threshold, with: 5
       
       click_on "Submit"
-      save_and_open_page
+      
       expect(current_path).to eq("/merchants/#{@merchant1.id}/bulk_discounts/#{@bulk_discount1.id}")
     end
   end

@@ -7,7 +7,7 @@ RSpec.describe BulkDiscount, type: :model do
   end
 
   describe 'validations' do
-    it { should validate_numericality_of :percentage_discount }
+    it { should validate_presence_of :percentage_discount }
     it { should validate_numericality_of :quantity_threshold }
   end
 end

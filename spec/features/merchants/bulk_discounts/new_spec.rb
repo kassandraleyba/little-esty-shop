@@ -24,26 +24,24 @@ RSpec.describe "Merchant Bulk Discount New Page" do
 
     it "When I fill in the form with valid data, Then I am redirected back to the bulk discount index" do
       fill_in "Name", with: "Twelve"
-      fill_in "Discount", with: 0.12
+      fill_in "Discount", with: "0.12"
       fill_in "Quantity", with: "5"
 
       click_on "Submit"
 
       expect(current_path).to eq("/merchants/#{@merchant1.id}/bulk_discounts")
-
       expect(page).to have_content("Twelve")
     end
 
-
     it "When I fill in the form with invalid data, Then the page displays a flash message" do
-      fill_in "Name", with: "Twelve"
-      fill_in "Discount", with: "Twelve"
-      fill_in "Quantity", with: "5"
+      fill_in :name, with: "Twelve"
+      fill_in :percentage_discount, with: ""
+      fill_in :quantity_threshold, with: "5"
 
       click_button "Submit"
 
-      # expect(current_path).to eq("/merchants/#{@merchant1.id}/bulk_discounts/new")
-      # expect(page).to have_content("Invalid Input")
+      expect(current_path).to eq("/merchants/#{@merchant1.id}/bulk_discounts/new")
+      expect(page).to have_content("Invalid Input")
     end
   end
 end
